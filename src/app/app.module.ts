@@ -1,38 +1,34 @@
+import { AuthInterceptor } from './core/auth/auth.interceptor';
+import { AuthModule } from './core/auth/auth.module';
+import { LayoutModule } from './core/layout/layout.module';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { RegistaListComponent } from './regista/regista-list/regista-list.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RegistaCreateComponent } from './regista/regista-create/regista-create.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { FilmListComponent } from './film/film-list/film-list.component';
-import { FilmDetailComponent } from './film/film-detail/film-detail.component';
-import { FilmCreateComponent } from './film/film-create/film-create.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    WelcomeComponent,
-    RegistaListComponent,
-    RegistaCreateComponent,
-    FilmListComponent,
-    FilmDetailComponent,
-    FilmCreateComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    LayoutModule,
+    AuthModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

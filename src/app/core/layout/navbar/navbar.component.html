@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Home</a>
+                    <a class="nav-link active" aria-current="page" (click)="backToWelcome()">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -34,9 +34,14 @@
             </ul>
         </div>
         <div class="col-md-3 text-end">
-            <p class="navbar-text">Utente: Pippo
-                <a href="">Logout</a>
+            <p class="navbar-text">Utente:{{(authService.getUserLogged() | async)?.username}}
+                <a href="" (click)="logout()">Logout</a>
             </p>
+
+            <!-- <div class="col-md-3 text-end" *ngIf="!authService.isLoggedIn()">
+                <p class="navbar-text">
+                    <a href="" (click)="authService.login()">Login</a>
+                </p> -->
         </div>
     </div>
 </nav>

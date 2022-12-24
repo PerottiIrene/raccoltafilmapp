@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegistaService } from 'src/app/features/regista/regista.service';
 import { Film } from 'src/app/model/film';
 import { Regista } from 'src/app/model/regista';
-import { RegistaService } from 'src/app/regista/regista.service';
 import { FilmService } from '../film.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class FilmCreateComponent implements OnInit {
   save(filmForm: NgForm): void {
     console.log('sub ' + JSON.stringify(this.film));
     if (filmForm.valid) {
-      this.film.regista = {id:this.registaId};
+      // this.film.regista = {id:this.registaId}
       this.filmService.addFilm(this.film).subscribe({
         next: filmItem => {
           this.film = filmItem;
